@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Моя жизнь{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'services' %}">Список услуг</a> |
+            <a href="{% url 'account' %}">Личный кабинет</a> |
+            <a href="{% url 'create_request' %}">Оставить заявку</a>
+
+            {% if user.is_authenticated %}
+                | Привет, {{ user.username }}!
+                <form action="{% url 'logout' %}" method="post" style="display:inline; margin: 0;">
+                    {% csrf_token %}
+                    <button type="submit">Выйти</button>
+                </form>
+            {% else %}
+                | <a href="{% url 'login' %}">Войти</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block main_content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

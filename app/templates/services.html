@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+    <h2>Мои услуги</h2>
+    <ul>
+        {% for service in services %}
+            <li>{{ service.name }} — {{ service.price }} рубликов.</li>
+        {% empty %}
+            <li>Услуг нет(</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

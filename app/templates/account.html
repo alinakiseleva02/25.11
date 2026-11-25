@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block main_content %}
+    <h2>Личный кабинет: {{ user.username }}</h2>
+    <h3>Твои заявки:</h3>
+
+    {% if requests %}
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            {% for request in requests %}
+                <li style="margin-bottom: 10px;">
+                    <strong>Услуга:</strong> {{ request.service.name }}<br>
+                    <strong>Комментарий:</strong> {{ request.comment }}<br>
+                    <strong>Статус:</strong> {{ request.get_status_display }}<br>
+                    <strong>Дата создания:</strong> {{ request.created_at|date:"d.m.Y H:i" }}
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Заявок нет</p>
+    {% endif %}
+{% endblock %}
